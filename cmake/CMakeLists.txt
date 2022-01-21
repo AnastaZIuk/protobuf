@@ -118,7 +118,12 @@ endif()
 
 add_definitions(-DGOOGLE_PROTOBUF_CMAKE_BUILD)
 
-find_package(Threads REQUIRED)
+if(BAW_BUILD_ANDROID)
+	set(CMAKE_USE_PTHREADS_INIT TRUE)
+else()
+	find_package(Threads REQUIRED)
+endif()
+
 if (CMAKE_USE_PTHREADS_INIT)
   add_definitions(-DHAVE_PTHREAD)
 endif (CMAKE_USE_PTHREADS_INIT)
